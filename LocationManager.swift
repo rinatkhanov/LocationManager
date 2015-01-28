@@ -261,8 +261,8 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
             if((delegate?.respondsToSelector(Selector("locationFoundGetAsString:longitude:")))!){
                 delegate?.locationFoundGetAsString!(latitudeAsString,longitude:longitudeAsString)
             }
-            if((delegate?.respondsToSelector(Selector("locationFound:longitude:")))!){
-                delegate?.locationFound(latitude,longitude:longitude)
+            if((delegate?.respondsToSelector(Selector("locationFound:longitude:speed:")))!){
+                delegate?.locationFound(latitude,longitude:longitude,speed:location.speed)
             }
         }
     }
@@ -526,7 +526,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
 
 @objc protocol LocationManagerDelegate : NSObjectProtocol
 {
-    func locationFound(latitude:Double, longitude:Double)
+    func locationFound(latitude:Double, longitude:Double, speed:Double)
     optional func locationFoundGetAsString(latitude:NSString, longitude:NSString)
     optional func locationManagerStatus(status:NSString)
     optional func locationManagerReceivedError(error:NSString)
